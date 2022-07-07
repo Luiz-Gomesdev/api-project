@@ -1,4 +1,4 @@
-package br.com.gft.dto;
+package br.com.gft.dto.endereco;
 
 public class EnderecoDTO {
 

@@ -1,4 +1,6 @@
-package br.com.gft.dto;
+package br.com.gft.dto.filial;
+
+import br.com.gft.dto.endereco.EnderecoDTO;
 
 public class ConsultaFilialDTO {
 
