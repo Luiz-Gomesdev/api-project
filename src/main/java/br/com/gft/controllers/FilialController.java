@@ -35,4 +35,41 @@ public class FilialController {
 
         return ResponseEntity.ok(FilialMapper.fromEntity(filial));
     }
+
+    @GetMapping("{id}")
+    public ResponseEntity<ConsultaFilialDTO> buscarFilial(@PathVariable Long id) {
+
+        try {
+            Filial filial = filialService.buscarFilial(id);
+
+            return ResponseEntity.ok(FilialMapper.fromEntity(filial));
+        } catch (RuntimeException ex) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<ConsultaFilialDTO> alterarFilial(@RequestBody RegistroFilialDTO dto,
+                                                           @PathVariable Long id) {
+        try {
+            Filial filial = filialService.atualizarFilial(FilialMapper.fromDTO(dto), id);
+
+            return ResponseEntity.ok(FilialMapper.fromEntity(filial));
+        } catch (RuntimeException ex) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<ConsultaFilialDTO> excluirFilial(@PathVariable Long id) {
+
+        try {
+            filialService.excluirFilial(id);
+
+            return ResponseEntity.ok().build();
+
+        } catch (RuntimeException ex) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
