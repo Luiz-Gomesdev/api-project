@@ -5,11 +5,11 @@ import br.com.gft.dto.filial.FilialMapper;
 import br.com.gft.dto.filial.RegistroFilialDTO;
 import br.com.gft.entities.Filial;
 import br.com.gft.services.FilialService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("v1/filiais")
@@ -22,10 +22,9 @@ public class FilialController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ConsultaFilialDTO>> buscarTodasAsFiliais() {
+    public ResponseEntity<Page<ConsultaFilialDTO>> buscarTodasAsFiliais(@PageableDefault Pageable pageable) {
 
-        return ResponseEntity.ok(filialService.listarTodasFiliais()
-                .stream().map(FilialMapper::fromEntity).collect(Collectors.toList()));
+        return ResponseEntity.ok(filialService.listarTodasFiliais(pageable).map(FilialMapper::fromEntity));
     }
 
     @PostMapping
@@ -39,13 +38,10 @@ public class FilialController {
     @GetMapping("{id}")
     public ResponseEntity<ConsultaFilialDTO> buscarFilial(@PathVariable Long id) {
 
-        try {
-            Filial filial = filialService.buscarFilial(id);
+        Filial filial = filialService.buscarFilial(id);
 
-            return ResponseEntity.ok(FilialMapper.fromEntity(filial));
-        } catch (RuntimeException ex) {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.ok(FilialMapper.fromEntity(filial));
+
     }
 
     @PutMapping("{id}")

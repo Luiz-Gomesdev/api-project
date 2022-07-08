@@ -1,10 +1,12 @@
 package br.com.gft.services;
 
 import br.com.gft.entities.Filial;
+import br.com.gft.exception.EntityNotFoundException;
 import br.com.gft.repositories.FilialRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,16 +24,16 @@ public class FilialService {
         return filialRepository.save(filial);
     }
 
-    public List<Filial> listarTodasFiliais() {
+    public Page<Filial> listarTodasFiliais(Pageable pageable) {
 
-        return filialRepository.findAll();
+        return filialRepository.findAll(pageable);
     }
 
     public Filial buscarFilial(Long id) {
 
         Optional<Filial> optional = filialRepository.findById(id);
 
-        return optional.orElseThrow(() -> new RuntimeException("Filial não encontrada"));
+        return optional.orElseThrow(() -> new EntityNotFoundException("Filial não encontrada"));
     }
 
     public Filial atualizarFilial(Filial filial, Long id) {
