@@ -26,7 +26,7 @@ public class ClienteService {
         return clienteRepository.findAll(pageable);
     }
 
-    public Cliente buscarFornecedor(Long id) {
+    public Cliente buscarCliente(Long id) {
 
         Optional<Cliente> optional = clienteRepository.findById(id);
 
@@ -35,7 +35,7 @@ public class ClienteService {
 
     public Cliente atualizarCliente(Cliente cliente, Long id) {
 
-        Cliente clienteOriginal = buscarFornecedor(id);
+        Cliente clienteOriginal = buscarCliente(id);
 
         cliente.setId(clienteOriginal.getId());
 
@@ -44,7 +44,7 @@ public class ClienteService {
 
     public void excluirCliente (Long id) {
 
-        Cliente cliente = buscarFornecedor(id);
+        Cliente cliente = buscarCliente(id);
 
         clienteRepository.delete(cliente);
     }

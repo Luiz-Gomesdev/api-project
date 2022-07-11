@@ -12,7 +12,7 @@ public class ClienteMapper {
 
     }
 
-    public ConsultaClienteDTO fromEntity (Cliente cliente) {
+    public static ConsultaClienteDTO fromEntity(Cliente cliente) {
 
         return new ConsultaClienteDTO(cliente.getId(), cliente.getCpf(), cliente.getNome(),
                 cliente.getTelefone(), cliente.getEmail(), EnderecoMapper.fromEntity(cliente.getEndereco()));

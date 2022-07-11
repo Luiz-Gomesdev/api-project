@@ -36,11 +36,12 @@ public class ProdutoService {
 
     public Produto atualizarProduto(Produto produto, Long id) {
 
-        Produto produtoOriginal = buscarProduto(id);
+        Produto produtoOriginal = this.buscarProduto(id);
 
         produto.setId(produtoOriginal.getId());
 
-        return produtoRepository.save(produtoOriginal);
+        return produtoRepository.save(produto);
+
     }
 
     public void excluirProduto(Long id) {

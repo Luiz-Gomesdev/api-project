@@ -1,5 +1,6 @@
 package br.com.gft.controllers;
 
+
 import br.com.gft.dto.produto.ConsultaProdutoDTO;
 import br.com.gft.dto.produto.ProdutoMapper;
 import br.com.gft.dto.produto.RegistroProdutoDTO;
@@ -31,5 +32,31 @@ public class produtoController {
         Produto produto = produtoService.salvarProduto(ProdutoMapper.fromDTO(dto));
 
         return ResponseEntity.ok(ProdutoMapper.fromEntity(produto));
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<ConsultaProdutoDTO> alterarProduto(@RequestBody RegistroProdutoDTO dto,
+                                                             @PathVariable Long id){
+
+        try {
+            Produto produto = produtoService.atualizarProduto(ProdutoMapper.fromDTO(dto), id);
+
+            return ResponseEntity.ok(ProdutoMapper.fromEntity(produto));
+        }catch(RuntimeException ex) {
+            return ResponseEntity.notFound().build();
+        }
+
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<ConsultaProdutoDTO> excluirProduto(@PathVariable Long id) {
+
+        try {
+            produtoService.excluirProduto(id);
+
+            return ResponseEntity.ok().build();
+        } catch (RuntimeException ex) {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
