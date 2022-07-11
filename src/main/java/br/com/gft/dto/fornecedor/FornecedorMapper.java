@@ -6,8 +6,8 @@ import br.com.gft.entities.Fornecedor;
 public class FornecedorMapper {
 
     public static Fornecedor fromDTO(RegistroFornecedorDTO dto) {
-        return new Fornecedor(null, dto.getCnpj(), dto.getNome(), dto.getTelefone(), dto.getEmail(),
-                EnderecoMapper.fromDTO(dto.getEndereco()));
+        return new Fornecedor(null
+        );
     }
 
     public static ConsultaFornecedorDTO fromEntity(Fornecedor fornecedor) {

@@ -24,6 +24,9 @@ public class Filial {
         this.endereco = endereco;
     }
 
+    public Filial(Long filialId) {
+    }
+
     public Long getId() {
         return id;
     }
